@@ -35,12 +35,14 @@ namespace LandscapeDesign.Models
             if (areaChange.NewObjectType is not null)
                 area.SetMainObject((ObjectType)areaChange.NewObjectType);
 
+            Thread.Sleep(500);
+
             if (areaChange.FlowerChanges is not null) {
                 foreach (var flowerChange in areaChange.FlowerChanges)
                 {
                     // с помощью свойства оповещение происходит внутри цветка
                     area._flowers[flowerChange.FlowerId].Type = flowerChange.FlowerType;
-                    Thread.Sleep(500); // задержка между установками новых цветов
+                    Thread.Sleep(1000); // задержка между установками новых цветов
                 }
             }
 

@@ -39,7 +39,7 @@ namespace LandscapeDesign.Models
                             EventType = EventType.DesignerComeToArea,
                             AreaId = change.AreaId
                         }); // дизайнер идёт к конкретной области
-                        Thread.Sleep(1500);
+                        Thread.Sleep(2000);
                         _city.ChangeArea(change);
                     }
 

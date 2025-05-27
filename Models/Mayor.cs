@@ -49,7 +49,7 @@ namespace LandscapeDesign.Models
                 _city.Notify(new CityEventArgs { 
                     EventType = EventType.MayorGoingAwayFromCity
                 }); // уходит из города
-                Thread.Sleep(15000);
+                Thread.Sleep(30000);
             }
         }
 
