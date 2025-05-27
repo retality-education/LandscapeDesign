@@ -42,7 +42,7 @@ namespace LandscapeDesign.View
         private readonly List<Point> flowerOffsets = new List<Point>
         {
             new Point(-83, 21),
-            new Point(29, 72),
+            new Point(29, -72),
             new Point(135, 21)
         };
 
@@ -53,7 +53,7 @@ namespace LandscapeDesign.View
         private readonly Point carCenterPosition = new Point(399, 268);
         private readonly Point carUnderCenterPosition = new Point(399, 422);
         private readonly Point mayorStartPosition = new Point(429, 500);
-        private readonly Point mayorUnderCenterPosition = new Point(429, 391);
+        private readonly Point mayorUnderCenterPosition = new Point(429, 434);
 
         private PictureBox mayorPicture = new PictureBox();
         private PictureBox designerPicture = new PictureBox();
@@ -82,7 +82,7 @@ namespace LandscapeDesign.View
             // Инициализация картинки машины
             carPicture.Size = carSize;
             carPicture.Location = designerShopPicture.Location;
-            carPicture.Image = Properties.Resources.Car;
+            carPicture.Image = Properties.Resources.DesignerCar;
             carPicture.SizeMode = PictureBoxSizeMode.StretchImage;
             carPicture.Visible = false;
             Controls.Add(carPicture);
@@ -221,6 +221,8 @@ namespace LandscapeDesign.View
             Invoke(new Action(() =>
             {
                 carPicture.Visible = true;
+                designerPicture.Location = carCenterPosition;
+
                 // Движение от магазина до нижней позиции
                 AnimateMovement(carPicture, designerShopPicture.Location, carUnderCenterPosition, 250, () =>
                 {
@@ -237,10 +239,9 @@ namespace LandscapeDesign.View
             Invoke(new Action(() =>
             {
                 designerPicture.Visible = true;
-                designerPicture.Location = carCenterPosition;
 
                 // Движение от машины к области
-                AnimateMovement(designerPicture, carCenterPosition, areaCenters[areaId], 500);
+                AnimateMovement(designerPicture, designerPicture.Location, areaCenters[areaId], 500);
             }));
         }
 
@@ -312,14 +313,10 @@ namespace LandscapeDesign.View
 
             if (ObjectsPictures.TryGetValue(areaId, out var pictureBox))
             {
-                var buildingImage = Properties.Resources.ObjectBuilding;
+                var buildingImage = Properties.Resources.BuildingObject;
                 Invoke(new Action(() =>
                 {
                     pictureBox.Image = buildingImage;
-                    if (buildingImage is Bitmap bmp && ImageAnimator.CanAnimate(bmp))
-                    {
-                        ImageAnimator.Animate(bmp, (sender, e) => Invoke(new Action(pictureBox.Refresh)));
-                    }
                 }));
             }
         }

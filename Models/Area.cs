@@ -45,9 +45,13 @@ namespace LandscapeDesign.Models
                 EventType = EventType.MainObjectStartBuilding, 
                 AreaId = AreaId 
             }); // начало строительства главного объекта
+            
             Thread.Sleep(2000);
             
             _mainObject.ChangeObject(obj);
+
+            Thread.Sleep(200);
+
             _city.Notify(new CityEventArgs { 
                 EventType = EventType.MainObjectEndBuilding, 
                 AreaId = AreaId, 
